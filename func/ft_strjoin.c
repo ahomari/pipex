@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 17:05:28 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/23 18:24:03 by ahomari          ###   ########.fr       */
+/*   Created: 2024/01/23 23:52:44 by ahomari           #+#    #+#             */
+/*   Updated: 2024/01/25 17:17:11 by ahmedomari       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int	ft_strcmp(char *s1, char *s2, int n)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int i;
+	char	*ptr;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (s1[i] || s2[i] && i < n)
+	j = 0;
+	ptr = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	if (!ptr)
+		return (NULL);
+	while (s1[i])
 	{
-		if (s1[i] != s2[i])
-			return(s1[i] - s2[i]);
+		ptr[i] = s1[i];
 		i++;
 	}
-	return (0);
+	while (s2[j])
+	{
+		ptr[i] = s2[j];
+		i++;
+		j++;
+	}
+	return (ptr);
 }
