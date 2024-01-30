@@ -24,7 +24,7 @@ S_OBJ		= ${FUNC_M:.c=.o}
 			${CC} ${FLAGS} -c $< -o $@
 
 ${NAME}:	${F_OBJ} ${S_OBJ}
-			@${LIBC} ${NAME} ${F_OBJ} ${S_OBJ}
+			@${CC} ${F_OBJ} ${S_OBJ}
 			@echo "${GREEN}=======> ${NAME} created! <=======${DEFAULT}"
 
 all:		${NAME}

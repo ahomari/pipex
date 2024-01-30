@@ -6,7 +6,7 @@
 /*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:08:08 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/27 10:23:46 by ahmedomari       ###   ########.fr       */
+/*   Updated: 2024/01/30 15:34:20 by ahmedomari       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int ac, char **av, char  **env)
 	pipex.infile = open(av[1], O_RDONLY);
 	if (pipex.infile < 0)
 		error_msg("Infile!!");
-	pipex.outfile = open(av[4], O_CREAT | O_WRONLY, 0777);
+	pipex.outfile = open(av[4], O_CREAT | O_WRONLY | O_TRUNC , 0777);
 	if(pipex.outfile < 0)
 		error_msg("Outfile!!");
 	if (pipe(pipex.pipe) < 0)
