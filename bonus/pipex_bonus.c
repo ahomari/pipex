@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 18:07:48 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/31 18:07:50 by ahomari          ###   ########.fr       */
+/*   Created: 2024/01/31 18:14:45 by ahomari           #+#    #+#             */
+/*   Updated: 2024/01/31 18:33:04 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+int main(int ac, char **av, char  **env)
 {
-	char	*ptr;
-	size_t	i;
+	int	i;
+	int stdin_;
+	int stdout_;
 
+	stdin_ = dup(0);
+	stdout_ = dup(1);
 	i = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (start + len > ft_strlen(s))
-		len = ft_strlen(s) - start;
-	ptr = ft_calloc(len + 1, sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (i < len)
+	if (ac >= 5)
 	{
-		ptr[i] = s[start];
-		i++;
-		start++;
+		while (i < ac - 1)
+		{
+			first_child(av, env);
+			second_child(av, env);
+			while (wait(0) != -1)
+				;
+			i++;
+		}
+		dup2(stdin_, 0);
+		dup2(stdout_, 1);
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	else
+		return (print_msg("Invalid Nmber of Arguments\n"));
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 18:01:36 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/31 18:16:42 by ahomari          ###   ########.fr       */
+/*   Created: 2024/01/31 18:15:59 by ahomari           #+#    #+#             */
+/*   Updated: 2024/01/31 18:16:52 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <libc.h>
 
@@ -29,5 +29,6 @@ int 	ft_strchr(char *s, char c);
 void    get_execve(char *av, char **env);
 void    first_child(char **av, char **env);
 void    second_child(char **av, char **env);
+
 
 #endif

@@ -1,15 +1,14 @@
-LIBC		= ar -rcs
 FLAGS		= -Wall -Wextra -Werror
 CC			= cc
 RM			= rm -rf
-NAME		= pipex.a
+NAME		= pipex
 
 
 HEAD		= pipex.h
 PATH_H		= include/
 HEADER		= ${addprefix ${PATH_H}, ${HEAD}}
 
-SRC_FUNC	= ft_calloc.c ft_split.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strcmp.c ft_substr.c 
+SRC_FUNC	= ft_calloc.c ft_split.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strcmp.c ft_substr.c ft_strchr.c
 PATH_F		= func/
 FUNC_S		= ${addprefix ${PATH_F}, ${SRC_FUNC}}
 F_OBJ		= ${FUNC_S:.c=.o}
@@ -24,7 +23,7 @@ S_OBJ		= ${FUNC_M:.c=.o}
 			${CC} ${FLAGS} -c $< -o $@
 
 ${NAME}:	${F_OBJ} ${S_OBJ}
-			@${CC} ${F_OBJ} ${S_OBJ}
+			@${CC} ${F_OBJ} ${S_OBJ} -o ${NAME}
 			@echo "${GREEN}=======> ${NAME} created! <=======${DEFAULT}"
 
 all:		${NAME}
@@ -41,8 +40,6 @@ fclean:		clean
 re: 		fclean all
 
 .PHONY: 	fclean all re  clean
-
-#COLORS
 
 RED = \033[1;31m
 GREEN = \033[1;32m
