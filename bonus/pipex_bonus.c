@@ -6,34 +6,67 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:14:45 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/31 18:33:04 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/03 14:46:15 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
-int main(int ac, char **av, char  **env)
+void	here_doc(int ac, char **av, char **env)
+{
+	int	p[2];
+	int	len;
+	int	i;
+	char	*line;
+	
+	error_msg_bonus(pipe(p), "Here Doc Pipe!!");
+	len = ft_strlen(av[2]);
+	while (1)
+	{
+		ft_putstr_fd("here_doc> ", 0);
+		line = get_next_line(0);
+		if (ft_strcmp(line, av[2], len) == 0 && line[len] == '\n')
+			break ;
+		ft_putstr_fd(line, p[1]);
+		free(line);
+	}
+	i = 2;
+	while (++i < ac -3)
+		first_here_child(av, env, i, &p[0]);
+	sec_here_child(ac, av, env);
+	exit (0);
+}
+
+void	leak()
+{
+	system("leaks pipex_bonus");
+}
+
+int	main(int ac, char **av, char **env)
 {
 	int	i;
-	int stdin_;
-	int stdout_;
+	int	infile;
+	int	stdin_;
+	int	stdout_;
 
 	stdin_ = dup(0);
 	stdout_ = dup(1);
-	i = 0;
+	i = 1;
+	leak();
 	if (ac >= 5)
 	{
-		while (i < ac - 1)
-		{
-			first_child(av, env);
-			second_child(av, env);
-			while (wait(0) != -1)
-				;
-			i++;
-		}
+		if (ft_strcmp(av[1], "here_doc", 8) == 0 && av[1][8] == '\0')
+			here_doc(ac, av, env);
+		infile = open(av[1], O_RDONLY);
+		error_msg_bonus(infile, "Infile!!");
+		while (++i < ac -2)
+			first_child(av, env, i, &infile);
+		second_child(ac, av, env);
 		dup2(stdin_, 0);
 		dup2(stdout_, 1);
+		while (wait(0) != -1)
+			;
 	}
 	else
-		return (print_msg("Invalid Nmber of Arguments\n"));
+		error_msg_bonus(-2, "Invalid Nmber of Arguments\n");
 }

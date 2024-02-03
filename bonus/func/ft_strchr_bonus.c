@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strchr_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 23:52:44 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/02 20:31:32 by ahomari          ###   ########.fr       */
+/*   Created: 2024/01/31 10:31:44 by ahomari           #+#    #+#             */
+/*   Updated: 2024/02/03 13:52:42 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../../include/pipex_bonus.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+int	ft_strchr(char *s, char c)
 {
-	char	*ptr;
-	int		i;
-	int		j;
+	unsigned int	i;
 
 	i = 0;
-	j = 0;
-	ptr = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (s1[i])
+	while (s[i])
 	{
-		ptr[i] = s1[i];
+		if (s[i] == c)
+			return (1);
 		i++;
 	}
-	while (s2[j])
-	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
-	}
-	return (ptr);
+	if (s[i] == c)
+		return (1);
+	return (0);
 }

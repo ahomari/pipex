@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 23:52:44 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/02 20:31:32 by ahomari          ###   ########.fr       */
+/*   Created: 2024/02/02 12:18:41 by ahomari           #+#    #+#             */
+/*   Updated: 2024/02/02 12:19:31 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strcpy(char *dst, char const *src, size_t len)
 {
-	char	*ptr;
-	int		i;
-	int		j;
+	size_t	i;
 
 	i = 0;
-	j = 0;
-	ptr = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (s1[i])
+	while (src[i] && i < len)
 	{
-		ptr[i] = s1[i];
+		dst[i] = src[i];
 		i++;
 	}
-	while (s2[j])
-	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
-	}
-	return (ptr);
+	dst[i] = '\0';
+	return (dst);
 }

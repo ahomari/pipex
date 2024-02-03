@@ -1,43 +1,63 @@
-FLAGS		= -Wall -Wextra -Werror
-CC			= cc
-RM			= rm -rf
-NAME		= pipex
+FLAGS			= -Wall -Wextra -Werror
+CC				= cc
+RM				= rm -rf
+NAME			= pipex
+NAME_BONUS		= pipex_bonus
+
+HEAD			= include/pipex.h
+HEAD_BONUS		= include/pipex_bonus.h
 
 
-HEAD		= pipex.h
-PATH_H		= include/
-HEADER		= ${addprefix ${PATH_H}, ${HEAD}}
+SRC_FUNC		= func/ft_calloc.c func/ft_split.c func/ft_strdup.c func/ft_strjoin.c func/ft_strlen.c \
+					func/ft_strcmp.c func/ft_substr.c func/ft_strchr.c func/ft_strcpy.c 
+F_OBJ			= ${SRC_FUNC:.c=.o}
 
-SRC_FUNC	= ft_calloc.c ft_split.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strcmp.c ft_substr.c ft_strchr.c
-PATH_F		= func/
-FUNC_S		= ${addprefix ${PATH_F}, ${SRC_FUNC}}
-F_OBJ		= ${FUNC_S:.c=.o}
+SRC_MAN			= mandatory/pipex.c mandatory/ft_childs.c mandatory/error_msg.c
+S_OBJ			= ${SRC_MAN:.c=.o}
 
-SRC_MAN		= pipex.c ft_childs.c error_msg.c
-PATH_M		= mandatory/
-FUNC_M		= ${addprefix ${PATH_M}, ${SRC_MAN}}
-S_OBJ		= ${FUNC_M:.c=.o}
+SRC_BONUS_FUNC	= bonus/func/ft_calloc_bonus.c bonus/func/ft_split_bonus.c bonus/func/ft_strdup_bonus.c bonus/func/ft_strjoin_bonus.c \
+					bonus/func/ft_strlen_bonus.c bonus/func/ft_strcmp_bonus.c bonus/func/ft_substr_bonus.c bonus/func/ft_strchr_bonus.c \
+					bonus/func/ft_strcpy_bonus.c bonus/func/ft_putstr_fd_bonus.c
+F_BONUS_OBJ		= ${SRC_BONUS_FUNC:.c=.o}
+
+SRC_BONUS		= bonus/pipex_bonus.c bonus/ft_childs_bonus.c bonus/error_msg_bonus.c bonus/ft_childs_here.c
+B_OBJ			= ${SRC_BONUS:.c=.o}
+
+GET_BONUS		= gnl/get_next_line.c gnl/ft_strjoinn.c
+BONUS_OBJ_GET	= ${GET_BONUS:.c=.o}
+
+%.o: %.c		${HEAD} Makefile
+				${CC} ${FLAGS} -c $< -o $@
+
+${NAME}:		${F_OBJ} ${S_OBJ}
+				@${CC} ${F_OBJ} ${S_OBJ} -o ${NAME}
+				@echo "${GREEN}=======> ${NAME} Created! <=======${DEFAULT}"
+
+bonus : 		${NAME_BONUS} 
+
+%_bonus.o: %.c	${HEAD_BONUS} Makefile
+				${CC} ${FLAGS} -c $< -o $@
 
 
-%.o: %.c	${HEADER} Makefile
-			${CC} ${FLAGS} -c $< -o $@
+${NAME_BONUS}:	${F_BONUS_OBJ} ${BONUS_OBJ_GET} ${B_OBJ}
+				@${CC} ${F_BONUS_OBJ} ${BONUS_OBJ_GET} ${B_OBJ} -o ${NAME_BONUS}
+				@echo "${GREEN}=======> ${NAME_BONUS} Created! <=======${DEFAULT}"
 
-${NAME}:	${F_OBJ} ${S_OBJ}
-			@${CC} ${F_OBJ} ${S_OBJ} -o ${NAME}
-			@echo "${GREEN}=======> ${NAME} created! <=======${DEFAULT}"
-
-all:		${NAME}
+all:			${NAME}
 
 clean:
-			@${RM} ${F_OBJ}
-			@${RM} ${S_OBJ}
-			@echo "${YELLOW}=======> object files deleted! <=======${DEFAULT}"
+				@${RM} ${F_OBJ}
+				@${RM} ${S_OBJ}
+				@${RM} ${B_OBJ}
+				@${RM} ${F_BONUS_OBJ}
+				@${RM} ${BONUS_OBJ_GET}
+				@echo "${YELLOW}=======> Object Files deleted! <=======${DEFAULT}"
 
-fclean:		clean
-			@${RM} ${NAME}
-			@echo "${RED}=======> all deleted! <=======${DEFAULT}"
+fclean:			clean
+				@${RM} ${NAME} ${NAME_BONUS}
+				@echo "${RED}=======> All Deleted! <=======${DEFAULT}"
 
-re: 		fclean all
+re: 			fclean all
 
 .PHONY: 	fclean all re  clean
 

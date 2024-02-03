@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:05:28 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/25 23:55:27 by ahmedomari       ###   ########.fr       */
+/*   Updated: 2024/02/01 16:16:56 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ft_strcmp(char *s1, char *s2, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)
 	{
 		if (s1[i] != s2[i])
-			return(s1[i] - s2[i]);
+			return (s1[i] - s2[i]);
 		i++;
 	}
 	return (0);

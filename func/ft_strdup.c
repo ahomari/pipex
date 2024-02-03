@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:07:35 by ahomari           #+#    #+#             */
-/*   Updated: 2024/01/31 18:07:37 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/01 16:17:33 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup(char *s1)
 {
 	char	*ptr;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	ptr = ft_calloc((ft_strlen(s1) + 1), sizeof(char));

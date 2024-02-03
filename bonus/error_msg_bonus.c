@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   error_msg_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 23:52:44 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/02 20:31:32 by ahomari          ###   ########.fr       */
+/*   Created: 2024/02/01 10:56:42 by ahomari           #+#    #+#             */
+/*   Updated: 2024/02/03 13:52:00 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+void	print_msg_bonus(char *str)
 {
-	char	*ptr;
-	int		i;
-	int		j;
+	int	i;
 
 	i = 0;
-	j = 0;
-	ptr = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (s1[i])
+	while (str[i])
 	{
-		ptr[i] = s1[i];
+		write (2, &str[i], 1);
 		i++;
 	}
-	while (s2[j])
+	exit(1);
+}
+
+void	error_msg_bonus(int num, char *str)
+{
+	if (num == -1)
 	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
+		perror(str);
+		exit(1);
 	}
-	return (ptr);
+	else if (num == -2)
+		print_msg_bonus(str);
 }
