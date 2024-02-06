@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:01:36 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/03 14:54:40 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/04 13:26:27 by ahmedomari       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char *s, char c);
 void	get_execve(char *av, char **env);
 void	first_child(char **av, char **env, int *infile);
-void	second_child(char **av, char **env);
-
-
-
-
+void	second_child(char **av, char **env); 
 
 #endif

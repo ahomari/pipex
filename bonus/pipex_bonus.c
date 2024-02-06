@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:14:45 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/03 14:46:15 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/04 15:03:16 by ahmedomari       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int ac, char **av, char **env)
 	stdin_ = dup(0);
 	stdout_ = dup(1);
 	i = 1;
-	leak();
+	// leak();
 	if (ac >= 5)
 	{
 		if (ft_strcmp(av[1], "here_doc", 8) == 0 && av[1][8] == '\0')

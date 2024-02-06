@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:59 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/03 14:54:07 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/04 13:26:17 by ahmedomari       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ void	first_here_child(char **av, char **env, int pos, int *infile);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoinn(char *s1, char *s2);
 
+
+
+
+
+ 
 
 
 #endif

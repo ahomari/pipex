@@ -4,8 +4,7 @@ RM				= rm -rf
 NAME			= pipex
 NAME_BONUS		= pipex_bonus
 
-HEAD			= include/pipex.h
-HEAD_BONUS		= include/pipex_bonus.h
+HEAD			= include/pipex.h include/pipex_bonus.h
 
 
 SRC_FUNC		= func/ft_calloc.c func/ft_split.c func/ft_strdup.c func/ft_strjoin.c func/ft_strlen.c \
@@ -31,19 +30,16 @@ BONUS_OBJ_GET	= ${GET_BONUS:.c=.o}
 
 ${NAME}:		${F_OBJ} ${S_OBJ}
 				@${CC} ${F_OBJ} ${S_OBJ} -o ${NAME}
-				@echo "${GREEN}=======> ${NAME} Created! <=======${DEFAULT}"
+				@echo "${GREEN}=======| ${NAME} Created! |=======${DEFAULT}"
+
+all:			${NAME}
 
 bonus : 		${NAME_BONUS} 
 
-%_bonus.o: %.c	${HEAD_BONUS} Makefile
-				${CC} ${FLAGS} -c $< -o $@
-
-
 ${NAME_BONUS}:	${F_BONUS_OBJ} ${BONUS_OBJ_GET} ${B_OBJ}
 				@${CC} ${F_BONUS_OBJ} ${BONUS_OBJ_GET} ${B_OBJ} -o ${NAME_BONUS}
-				@echo "${GREEN}=======> ${NAME_BONUS} Created! <=======${DEFAULT}"
+				@echo "${GREEN}=======| ${NAME_BONUS} Created! |=======${DEFAULT}"
 
-all:			${NAME}
 
 clean:
 				@${RM} ${F_OBJ}
@@ -51,11 +47,11 @@ clean:
 				@${RM} ${B_OBJ}
 				@${RM} ${F_BONUS_OBJ}
 				@${RM} ${BONUS_OBJ_GET}
-				@echo "${YELLOW}=======> Object Files deleted! <=======${DEFAULT}"
+				@echo "${YELLOW}=======| Object Files deleted! |=======${DEFAULT}"
 
 fclean:			clean
 				@${RM} ${NAME} ${NAME_BONUS}
-				@echo "${RED}=======> All Deleted! <=======${DEFAULT}"
+				@echo "${RED}=======| All Deleted! |=======${DEFAULT}"
 
 re: 			fclean all
 
