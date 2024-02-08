@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:10 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/03 10:46:33 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:36:54 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,29 @@ void	get_execve(char *av, char **env)
 
 	command = ft_split(av, ' ');
 	if (ft_strchr(av, '/') == 1)
-		error_msg_bonus(execve(av, command, NULL), "command not found");
+		error_msg_bonus(execve(av, command, NULL), "Command Not Found !!");
 	find_path = ft_index(env);
 	cmd_path = ft_split(env[find_path] + 5, ':');
 	cmd = ft_get_cmd(cmd_path, command[0]);
-	error_msg_bonus(execve(cmd, command, env), "command not found");
+	error_msg_bonus(execve(cmd, command, env), "Command Not Found !!");
 }
 
-void	first_child(char **av, char **env, int pos, int *infile)
+void	first_child(char **av, char **env, int pos)
 {
 	int		p[2];
 	pid_t	pid1;
 
-	error_msg_bonus(pipe(p), "Pipe!!");
+	error_msg_bonus(pipe(p), "Pipe !!");
 	pid1 = fork();
 	if (pid1 == 0)
 	{
 		close(p[0]);
 		dup2(p[1], 1);
-		dup2(*infile, 0);
 		close(p[1]);
-		close(*infile);
 		get_execve(av[pos], env);
 	}
 	else
 	{
-		close(*infile);
 		close(p[1]);
 		dup2(p[0], 0);
 		close(p[0]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmedomari <ahmedomari@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:59 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/04 13:26:17 by ahmedomari       ###   ########.fr       */
+/*   Updated: 2024/02/07 16:03:14 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char *s, char c);
 char	*ft_strcpy(char *dst, char const *src, size_t len);
 void	get_execve(char *av, char **env);
-void	first_child(char **av, char **env, int pos, int *infile);
+void	first_child(char **av, char **env, int pos);
 void	second_child(int ac, char **av, char **env);
 char	*get_next_line(int fd);
 void	here_doc(int ac, char **av, char **env);
@@ -39,12 +39,5 @@ void	sec_here_child(int ac, char **av, char **env);
 void	first_here_child(char **av, char **env, int pos, int *infile);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoinn(char *s1, char *s2);
-
-
-
-
-
- 
-
 
 #endif

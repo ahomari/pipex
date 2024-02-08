@@ -30,7 +30,9 @@ BONUS_OBJ_GET	= ${GET_BONUS:.c=.o}
 
 ${NAME}:		${F_OBJ} ${S_OBJ}
 				@${CC} ${F_OBJ} ${S_OBJ} -o ${NAME}
+				@echo "${GREEN}================================${DEFAULT}"
 				@echo "${GREEN}=======| ${NAME} Created! |=======${DEFAULT}"
+				@echo "${GREEN}================================${DEFAULT}"
 
 all:			${NAME}
 
@@ -38,7 +40,10 @@ bonus : 		${NAME_BONUS}
 
 ${NAME_BONUS}:	${F_BONUS_OBJ} ${BONUS_OBJ_GET} ${B_OBJ}
 				@${CC} ${F_BONUS_OBJ} ${BONUS_OBJ_GET} ${B_OBJ} -o ${NAME_BONUS}
+				@echo "${GREEN}======================================${DEFAULT}"
 				@echo "${GREEN}=======| ${NAME_BONUS} Created! |=======${DEFAULT}"
+				@echo "${GREEN}======================================${DEFAULT}"
+
 
 
 clean:
@@ -47,11 +52,15 @@ clean:
 				@${RM} ${B_OBJ}
 				@${RM} ${F_BONUS_OBJ}
 				@${RM} ${BONUS_OBJ_GET}
+				@echo "${YELLOW}=======================================${DEFAULT}"
 				@echo "${YELLOW}=======| Object Files deleted! |=======${DEFAULT}"
+				@echo "${YELLOW}=======================================${DEFAULT}"
 
 fclean:			clean
 				@${RM} ${NAME} ${NAME_BONUS}
+				@echo "${RED}==============================${DEFAULT}"
 				@echo "${RED}=======| All Deleted! |=======${DEFAULT}"
+				@echo "${RED}==============================${DEFAULT}"
 
 re: 			fclean all
 
