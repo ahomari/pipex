@@ -6,13 +6,13 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:14:22 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/07 15:43:00 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:06:41 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-void	first_here_child(char **av, char **env, int pos, int *infile)
+void	first_here_child(char **av, char **env, int pos)
 {
 	int		p[2];
 	pid_t	pid1;
@@ -23,14 +23,11 @@ void	first_here_child(char **av, char **env, int pos, int *infile)
 	{
 		close(p[0]);
 		dup2(p[1], 1);
-		dup2(*infile, 0);
 		close(p[1]);
-		close(*infile);
 		get_execve(av[pos], env);
 	}
 	else
 	{
-		close(*infile);
 		close(p[1]);
 		dup2(p[0], 0);
 		close(p[0]);
