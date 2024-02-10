@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:59 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/10 17:42:46 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/10 22:12:11 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	get_execve(char *av, char **env);
 void	first_child(char **av, char **env, int pos);
 void	second_child(int ac, char **av, char **env);
 char	*get_next_line(int fd);
-void	here_doc(int ac, char **av, char **env, int *stdin_, int *stdout_);
+void	here_doc(int ac, char **av, char **env);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoinn(char *s1, char *s2);
 
