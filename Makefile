@@ -3,7 +3,6 @@ CC				= cc
 RM				= rm -rf
 NAME			= pipex
 NAME_BONUS		= pipex_bonus
-
 HEAD			= include/pipex.h include/pipex_bonus.h
 
 
@@ -19,7 +18,7 @@ SRC_BONUS_FUNC	= bonus/func/ft_calloc_bonus.c bonus/func/ft_split_bonus.c bonus/
 					bonus/func/ft_strcpy_bonus.c bonus/func/ft_putstr_fd_bonus.c
 F_BONUS_OBJ		= ${SRC_BONUS_FUNC:.c=.o}
 
-SRC_BONUS		= bonus/pipex_bonus.c bonus/ft_childs_bonus.c bonus/error_msg_bonus.c bonus/ft_childs_here.c
+SRC_BONUS		= bonus/pipex_bonus.c bonus/ft_childs_bonus.c bonus/error_msg_bonus.c
 B_OBJ			= ${SRC_BONUS:.c=.o}
 
 GET_BONUS		= gnl/get_next_line.c gnl/ft_strjoinn.c

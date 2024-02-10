@@ -6,19 +6,21 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:14:45 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/09 20:50:44 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/10 17:45:13 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-void	here_doc(int ac, char **av, char **env)
+void	here_doc(int ac, char **av, char **env, int *stdin_, int *stdout_)
 {
 	int		p[2];
 	int		len;
 	int		i;
 	char	*line;
-	
+
+	error_msg_bonus(close(*stdin_), "Close Failed !!");
+	error_msg_bonus(close(*stdout_), "Close Failed !!");
 	error_msg_bonus(pipe(p), "Here Doc Pipe!!");
 	len = ft_strlen(av[2]);
 	while (1)
@@ -31,20 +33,28 @@ void	here_doc(int ac, char **av, char **env)
 		free(line);
 	}
 	i = 3;
-	close(p[1]);
-	dup2(p[0], STDIN_FILENO);
-	close(p[0]);
+	error_msg_bonus(close(p[1]), "Close Failed !!");
+	error_msg_bonus(dup2(p[0], STDIN_FILENO), "Dup Failed !!");
+	error_msg_bonus(close(p[0]), "Close Failed !!");
 	while (i < ac - 2)
-	{
-		first_here_child(av, env, i);
-		i++;
-	}
-	sec_here_child(ac, av, env);
+		first_child(av, env, i++);
+	second_child(ac, av, env);
+	while (wait(0) != -1)
+			;
 	exit (0);
 }
 
-void	leak()
+void	ft_open(char **av, int *infile)
 {
+	*infile = open(av[1], O_RDONLY);
+	error_msg_bonus(*infile, "Infile!!");
+	error_msg_bonus(dup2(*infile, STDIN_FILENO), "Dup Failed !!");
+	error_msg_bonus(close(*infile), "Close Failed !!");
+}
+
+void f()
+{
+	system("lsof -c pipex_bonus");
 	system("leaks pipex_bonus");
 }
 
@@ -55,25 +65,22 @@ int	main(int ac, char **av, char **env)
 	int	stdin_;
 	int	stdout_;
 
+	// atexit(f);
 	stdin_ = dup(0);
 	stdout_ = dup(1);
 	i = 2;
 	if (ac >= 5)
 	{
 		if (ft_strcmp(av[1], "here_doc", 8) == 0 && av[1][8] == '\0')
-			here_doc(ac, av, env);
-		infile = open(av[1], O_RDONLY);
-		dup2(infile, 0);
-		close(infile);
-		error_msg_bonus(infile, "Infile!!");
+			here_doc(ac, av, env, &stdin_, &stdout_);
+		ft_open(av, &infile);
 		while (i < ac -2)
-		{
-			first_child(av, env, i);
-			i++;
-		}
+			first_child(av, env, i++);
 		second_child(ac, av, env);
-		dup2(stdin_, 0);
-		dup2(stdout_, 1);
+		error_msg_bonus(dup2(stdin_, STDIN_FILENO), "Dup Failed !!");
+		error_msg_bonus(dup2(stdout_, STDOUT_FILENO), "Dup Failed !!");
+		error_msg_bonus(close(stdin_), "Close Failed !!");
+		error_msg_bonus(close(stdout_), "Close Failed !!");
 		while (wait(0) != -1)
 			;
 	}

@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:08:02 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/07 11:33:06 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/09 22:30:35 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	get_execve(char *av, char **env)
 	error_msg(execve(cmd, command, env), "command not found");
 }
 
-void	first_child(char **av, char **env, int *infile)
+void	first_child(char **av, char **env)
 {
 	int		p[2];
 	pid_t	pid1;
@@ -73,19 +73,16 @@ void	first_child(char **av, char **env, int *infile)
 	pid1 = fork();
 	if (pid1 == 0)
 	{
-		close(p[0]);
-		dup2(p[1], 1);
-		dup2(*infile, 0);
-		close(p[1]);
-		close(*infile);
+		error_msg(close(p[0]), "Close Failed !!");
+		error_msg(dup2(p[1], STDOUT_FILENO), "Dup Failed !!");
+		error_msg(close(p[1]), "Close Failed !!");
 		get_execve(av[2], env);
 	}
 	else
 	{
-		close(*infile);
-		close(p[1]);
-		dup2(p[0], 0);
-		close(p[0]);
+		error_msg(close(p[1]), "Close Failed !!");
+		error_msg(dup2(p[0], STDIN_FILENO), "Dup Failed !!");
+		error_msg(close(p[0]), "Close Failed !!");
 	}
 }
 
@@ -99,10 +96,10 @@ void	second_child(char **av, char **env)
 	pid2 = fork();
 	if (pid2 == 0)
 	{
-		dup2(outfile, 1);
-		close(outfile);
+		error_msg(dup2(outfile, 1), "Dup Failed !!");
+		error_msg(close(outfile), "Close Failed !!");
 		get_execve(av[3], env);
 	}
 	else
-		close(outfile);
+		error_msg(close(outfile), "Close Failed !!");
 }

@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:10 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/09 01:33:01 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/09 21:57:50 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ void	first_child(char **av, char **env, int pos)
 	pid1 = fork();
 	if (pid1 == 0)
 	{
-		close(p[0]);
-		dup2(p[1], 1);
-		close(p[1]);
+		error_msg_bonus(close(p[0]), "Close Failed !!");
+		error_msg_bonus(dup2(p[1], STDOUT_FILENO), "Dup Failed !!");
+		error_msg_bonus(close(p[1]), "Close Failed !!");
 		get_execve(av[pos], env);
 	}
 	else
 	{
-		close(p[1]);
-		dup2(p[0], 0);
-		close(p[0]);
+		error_msg_bonus(close(p[1]), "Close Failed !!");
+		error_msg_bonus(dup2(p[0], STDIN_FILENO), "Dup Failed !!");
+		error_msg_bonus(close(p[0]), "Close Failed !!");
 	}
 }
 
@@ -89,15 +89,18 @@ void	second_child(int ac, char **av, char **env)
 	int		outfile;
 	pid_t	pid2;
 
-	outfile = open(av[ac - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (ft_strcmp(av[1], "here_doc", 8) == 0 && av[1][8] == '\0')
+		outfile = open(av[ac - 1], O_CREAT | O_WRONLY | O_APPEND, 0644);
+	else
+		outfile = open(av[ac - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	error_msg_bonus(outfile, "Outfile!!");
 	pid2 = fork();
 	if (pid2 == 0)
 	{
-		dup2(outfile, 1);
-		close(outfile);
+		error_msg_bonus(dup2(outfile, STDOUT_FILENO), "Dup Failed !!");
+		error_msg_bonus(close(outfile), "Close Failed !!");
 		get_execve(av[ac - 2], env);
 	}
 	else
-		close(outfile);
+		error_msg_bonus(close(outfile), "Close Failed !!");
 }

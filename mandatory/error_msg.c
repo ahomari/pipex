@@ -6,13 +6,13 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:07:15 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/01 21:51:58 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/10 13:55:04 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	print_msg(char *str)
+static void	print_msg(char *str)
 {
 	int	i;
 
