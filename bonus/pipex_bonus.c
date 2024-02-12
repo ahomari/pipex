@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:14:45 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/10 22:32:59 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:10:34 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	here_doc(int ac, char **av, char **env)
 	{
 		ft_putstr_fd("here_doc> ", 0);
 		line = get_next_line(0);
+		if (!line)
+			break ;
 		if (ft_strcmp(line, av[2], len) == 0 && line[len] == '\n')
 			break ;
 		ft_putstr_fd(line, p[1]);
@@ -49,46 +51,41 @@ void	here_doc(int ac, char **av, char **env)
 		first_child(av, env, i++);
 	second_child(ac, av, env);
 	while (wait(0) != -1)
-			;
-	exit (0);
+		;
 }
 
 void	ft_open(int ac, char **av, char **env)
 {
 	int	infile;
 	int	i;
-	
+
 	i = 2;
 	infile = open(av[1], O_RDONLY);
 	error_msg_bonus(infile, "Infile!!");
 	error_msg_bonus(dup2(infile, STDIN_FILENO), "Dup Failed !!");
 	error_msg_bonus(close(infile), "Close Failed !!");
+	error_msg_bonus(ft_index(env), "unset PATH !!!!");
 	while (i < ac -2)
-			first_child(av, env, i++);
-		second_child(ac, av, env);
-}
-void f()
-{
-	system("lsof -c pipex");
-	system("leaks pipex");
+		first_child(av, env, i++);
+	second_child(ac, av, env);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	int	i;
 	int	stdin_;
 	int	stdout_;
 
-	atexit(f);
 	stdin_ = dup(0);
 	stdout_ = dup(1);
-	i = 2;
+	error_msg_bonus(stdin_, "Dup Failed !!");
+	error_msg_bonus(stdout_, "Dup Failed !!");
 	if (ac >= 5)
 	{
 		if (ft_strcmp(av[1], "here_doc", 8) == 0 && av[1][8] == '\0')
 		{
 			ft_close_files(stdin_, stdout_);
 			here_doc(ac, av, env);
+			exit(0);
 		}
 		ft_open(ac, av, env);
 		error_msg_bonus(dup2(stdin_, STDIN_FILENO), "Dup Failed !!");

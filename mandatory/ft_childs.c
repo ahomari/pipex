@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:08:02 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/09 22:30:35 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:58:55 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_index(char **env)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (-2);
 }
 
 static char	*ft_get_cmd(char **path, char *cmd)
@@ -54,11 +54,9 @@ void	get_execve(char *av, char **env)
 	char	*cmd;
 
 	command = ft_split(av, ' ');
-	if (ft_strchr(av, '/') == 1)
-	{
-		error_msg(execve(av, command, NULL), "command not found");
-	}
 	find_path = ft_index(env);
+	if (ft_strchr(av, '/') == 1)
+		error_msg(execve(av, command, NULL), "command not found");
 	cmd_path = ft_split(env[find_path] + 5, ':');
 	cmd = ft_get_cmd(cmd_path, command[0]);
 	error_msg(execve(cmd, command, env), "command not found");

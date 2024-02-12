@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:10 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/09 21:57:50 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:00:37 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_index(char **env)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (-2);
 }
 
 char	*ft_get_cmd(char **path, char *cmd)

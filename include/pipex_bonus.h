@@ -6,7 +6,7 @@
 /*   By: ahomari <ahomari@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:15:59 by ahomari           #+#    #+#             */
-/*   Updated: 2024/02/10 22:12:11 by ahomari          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:00:00 by ahomari          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 #  define BUFFER_SIZE 10
 # endif
 
-# include <libc.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <string.h>
+# include <stdio.h>
+# include <limits.h>
 
 int		ft_strcmp(char *s1, char *s2, int n);
 char	**ft_split(char *s, char c);
@@ -36,5 +41,6 @@ char	*get_next_line(int fd);
 void	here_doc(int ac, char **av, char **env);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoinn(char *s1, char *s2);
+int		ft_index(char **env);
 
 #endif
